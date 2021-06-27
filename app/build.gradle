@@ -4,12 +4,12 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
 }
 
 android {
     compileSdkVersion Application.compileSdk
-    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId Application.id
@@ -18,7 +18,7 @@ android {
         versionCode Application.versionCode
         versionName Application.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.shinyj.template.mvi.MockTestRunner"
     }
 
     buildTypes {
@@ -34,16 +34,65 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+
+    // Required for Hilt Test Implementation
+    configurations.all{
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.0'
+    }
 }
 
 dependencies {
 
+    // Kotlin & Coroutines
     implementation JetBrains.Kotlin.stdlib
-    implementation Android.Jetpack.coreKtx
-    implementation Android.Jetpack.appCompat
+    implementation JetBrains.Coroutines.core
+    implementation JetBrains.Coroutines.android
+
     implementation Google.Material.material
+
+    implementation Android.Jetpack.coreKtx
+    implementation Android.Jetpack.fragmentKtx
+    implementation Android.Jetpack.appCompat
     implementation Android.Jetpack.constraintLayout
+    implementation Android.Jetpack.legacy
+    implementation Android.Jetpack.datastore
+
+    // Navigation
+    implementation Android.Jetpack.navigationRuntime
+    implementation Android.Jetpack.navigationUi
+    implementation Android.Jetpack.navigationFragment
+
+    // Hilt
+    implementation Android.Jetpack.hiltViewModel
+    implementation Google.Hilt.android
+    kapt Google.Hilt.compiler
+
     testImplementation JUnit.junit
     androidTestImplementation Android.Test.junitExt
     androidTestImplementation Android.Test.espressoCore
+
+    //For Hilt instrumentation Test
+    androidTestImplementation Google.Hilt.test
+    kaptAndroidTest Google.Hilt.testCompiler
+
+    //For Hilt local Unit Test
+    testImplementation Google.Hilt.test
+    kaptTest Google.Hilt.testCompiler
+
+    androidTestImplementation Android.Test.testCoreKtx
+    debugImplementation Android.Test.fragmentTest
+
+    // Memory Leak Detection
+    debugImplementation Square.LeakCanary.leakCanary
+}
+
+// Required for Hilt Implementation
+kapt {
+    correctErrorTypes true
 }

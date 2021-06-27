@@ -12,7 +12,7 @@ object JetBrains {
     object Coroutines {
         private val coroutinesVersion = "1.4.3"
         val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-        val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android$coroutinesVersion"
+        val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     }
 
