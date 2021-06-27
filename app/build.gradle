@@ -1,18 +1,22 @@
+import com.shinyj.template.mvi.buildsrc.*
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion Application.compileSdk
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.shinyj.template.mvi"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId Application.id
+        minSdkVersion Application.minSdk
+        targetSdkVersion Application.targetSdk
+        versionCode Application.versionCode
+        versionName Application.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,18 +32,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation JetBrains.Kotlin.stdlib
+    implementation Android.Jetpack.coreKtx
+    implementation Android.Jetpack.appCompat
+    implementation Google.Material.material
+    implementation Android.Jetpack.constraintLayout
+    testImplementation JUnit.junit
+    androidTestImplementation Android.Test.junitExt
+    androidTestImplementation Android.Test.espressoCore
 }

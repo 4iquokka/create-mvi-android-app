@@ -1,0 +1,10 @@
+package com.shinyj.template.mvi.buildsrc
+
+object Application {
+    const val id = "com.shinyj.template.mvi"
+    const val minSdk = 26
+    const val compileSdk = 30
+    const val targetSdk = 30
+    const val versionCode = 1
+    const val versionName = "1.0"
+}
